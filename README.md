@@ -1,2 +1,2 @@
 # FastAPI-Python
-This repo is to build FastAPI in Python
+This repo is to build FastAPI(Python Framework)
