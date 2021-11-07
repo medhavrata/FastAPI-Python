@@ -1,5 +1,5 @@
 install:
-	# pip install --upgrade pip &&\     # Need to comment this line if using gitpod as it is not allowing to upgrade pip version
+	pip install --upgrade pip &&\
 		pip install -r requirements.txt
 
 test:

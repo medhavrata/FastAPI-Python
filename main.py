@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from fastapi.params import Body
+import uvicorn
 
 app = FastAPI()
 
@@ -18,3 +20,12 @@ async def root():
 @app.get("/posts")
 def get_posts():
     return{"message": "Here are your posts, enjoy your day"}
+    
+@app.post("/createposts")
+def create_posts(payLoad: dict = Body(...)):
+    """This func will take Body from input message, convert this to dictionay and save to payLoad variable"""
+    print(payLoad)
+    return{"message": "You have successufully created the post"}
+    
+if __name__ == '__main__':
+    uvicorn.run(app, port=8080, host='0.0.0.0')
