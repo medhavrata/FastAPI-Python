@@ -25,7 +25,7 @@ def get_posts():
 def create_posts(payLoad: dict = Body(...)):
     """This func will take Body from input message, convert this to dictionay and save to payLoad variable"""
     print(payLoad)
-    return{"message": "You have successufully created the post"}
+    return{"new message is": f"title: {payLoad['title']} and content is: {payLoad['content']}"}
     
 if __name__ == '__main__':
     uvicorn.run(app, port=8080, host='0.0.0.0')
