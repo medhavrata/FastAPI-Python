@@ -2,6 +2,7 @@ from typing import Optional
 from fastapi import FastAPI
 from fastapi.params import Body
 from pydantic import BaseModel # this is the library to define the schema
+from random import randrange
 
 import uvicorn
 
@@ -15,6 +16,12 @@ class Post(BaseModel):
     rating: Optional[int] = None
 
 my_posts = [{"title":"first title", "content": "first content", "id": 1}, {"title": "second title", "content": "second content", "id": 2}]
+
+def find_post(id):
+    """This function will take an ID as an Input and return back the post"""
+    for post in my_posts:
+        if post["id"] == id:
+            return post
 
 # @app -> This is the decorator and need to provide the instance name of FastAPI class, app, in this case
 # get -> Method name
@@ -32,6 +39,12 @@ async def root():
 @app.get("/posts")
 def get_posts():
     return {"message": my_posts}
+
+@app.get("/posts/{id}")
+def get_post(id : int):
+    post = find_post(id)
+    return {"post detail": post}
+
     
 # @app.post("/createposts")
 # def create_posts(payLoad: dict = Body(...)):
@@ -42,9 +55,10 @@ def get_posts():
 @app.post("/posts")
 def create_posts(post : Post):
     """ This function will take the input data and will check the schema as per Post Class"""
-    print(post) # print the pydantic model
-    print(post.dict()) # print the dictionary of pydantic model i.e. change the new_post
-    return {"data": post}
+    post_dict = post.dict()
+    post_dict["id"] = randrange(0, 1000000000)
+    my_posts.append(post_dict)
+    return {"data": post_dict}
     
 if __name__ == '__main__':
     uvicorn.run(app, port=8080, host='0.0.0.0')
