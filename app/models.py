@@ -34,7 +34,7 @@ class User(Base):
     email = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
-    phone_number = Column(Integer, nullable=False)
+    phone_number = Column(Integer, nullable=True)
 
 # BELOW IS THE MODEL TO DEFINE THE VOTES TABLE. THIS TABLE IS BEING 
 # CREATED TO STORE THE LIKES ON THE POST BY THE USER
