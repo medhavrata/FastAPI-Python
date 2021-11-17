@@ -15,6 +15,7 @@ class UserCreate(BaseModel):
     """This Class will extend BaseModel to define the Schema for User Creation"""
     email: EmailStr
     password: str
+    phone_number: int
 
 class UserResponse(BaseModel):
     id: int
