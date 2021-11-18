@@ -101,3 +101,19 @@ Once the Application is ready:
 - run $ sudo ufw status , it will show the currently applied firewall rules
 - to set the rules run, $ sudo ufw allow http / sudo ufw allow https / sudo ufw allow ssh
 - to delete a run, in case, sudo ufw delete allow http
+
+## Done Some changes locally
+
+- Push the changes to GitHub
+- Pull the changes at Server
+- Restart the service (systemctl restart fastapi)
+
+## We can containerized the App
+
+- Build a Docker Image of App using Python as Base Image
+- Create a docker-compose file to run the container and pass the environment variables
+- Use the Postgres image in the docker-compose file, so that both application and database will run in container
+
+## Local changes will not be pushed to application running in Container
+
+- If we make any local changes
