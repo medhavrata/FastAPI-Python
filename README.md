@@ -34,6 +34,7 @@ Once the Application is ready:
   - App will be started by Heroku, once the changes will be pushed
 
 - App can be installed on VM (IAAS)
+
   - Create an Ubuntu VM
   - Update the VM(sudo apt update && sudo apt upgrade) and install python3/pip3/virtualenv
   - Install postgresqul (sudo apt install postgresql postgresql-contrib)
@@ -82,3 +83,21 @@ Once the Application is ready:
     - Need to amend the service file to mention (EnvironmentFile) from where the environment variables to pick
     - Run: $ systemctl restart fastapi
     - To enable the restart of application: $ sudo systemctl enable fastapi
+
+- Application is being deployed on the VM and the user interacting with the App directly, but it is not optimized solution.
+- We can use nginx web server to act as a proxy for our application
+- Install nginx on the server and nginx will recieve all the requests (http/s) and will do SSL termination as well and send http request to application
+- By doing so, we don't need to put all this logic in our Application
+- $ sudo apt install nginx
+- After installing, go to server ip address and it will load the nginx default page
+- To change the default page settings, go to: $ cd /etc/nginx/sites-available/
+- Check the settings in default config file
+- We can update the location in default config file to act as a proxy
+-         location / {
+                proxy_pass http://localhost:8000;
+- This change is: whatever comes to root path and beyond to nginx, pass that traffic to localhost:8000, where our app is running
+- Optionally, we can setup a domain name which will point to the server and can setup the SSL for the domain name
+- Next, we need to setup the firewall rules on the server, using ufw (Uncomplicated FireWall)
+- run $ sudo ufw status , it will show the currently applied firewall rules
+- to set the rules run, $ sudo ufw allow http / sudo ufw allow https / sudo ufw allow ssh
+- to delete a run, in case, sudo ufw delete allow http
