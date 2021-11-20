@@ -11,7 +11,7 @@ source venv/bin/activate
 
 ---
 
-How to build the RestAPI using FastAPI:
+## How to build the RestAPI using FastAPI:
 
 - FastAPI is a Python framework to build the RestAPI
 - It will run the application as an API endpoint and will access the online requests from frontend
@@ -21,7 +21,7 @@ How to build the RestAPI using FastAPI:
 - Define the Environmental Variables
 - Can use "alembic" to create the Postgres tables
 
-Once the Application is ready:
+### Once the Application is ready:
 
 - Push the changes to GitHub, remember to create the .gitignore file so that don't push the confidential data to GitHub
 - App can be hosted on Heroku(PAAS):
@@ -116,4 +116,30 @@ Once the Application is ready:
 
 ## Local changes will not be pushed to application running in Container
 
-- If we make any local changes
+- If we make any local changes, those will not be reflected in the container
+- To sync this, we can use the bind volumne and bind the local directory to container directory
+- This will sync any local changes in the container as well
+- Use: volumes: - ./:/usr/src/app:ro
+- The last option is ro(read only), so container can't change anything in this directory
+- Give the command option in docker-compoase as well to reload the application
+- Now we can push the application image to Docker Hub, from where it can be pulled by production server
+- But we need to create two separate docker-compose file, one for dev and one for prod
+- In the dev docker-compose file, we are building an image and in prod we are pulling an image
+
+## Building the Testing for our Application using PYTEST
+
+- Use the PYTEST/testclient library to do the testing
+- Create the file to include the test functions with name test-\*.py
+- Testclient works similar to 'requests' libaray where we can make the calls to a specific route
+- But we need to make a separate testing database rathar than messing up with the development database
+- To do this, we can create a test database instance in the testing file and use the instnace
+- Provide the database details in the testing file, it can be local testing database, might be running in container or on the cloud
+- While testing using pytest:
+  - We can create the fixtures, it is a function which other functions can inherit
+  - We can also parameterize the tests
+
+#### Some Issues to tackle :
+
+- sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SCRAM authentication requires libpq version 10 or above(while running postgresql
+  from container)
+- Created one additional alembic version, need to figure out how to delete that one (b25644a3ef6c)

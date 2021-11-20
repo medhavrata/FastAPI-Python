@@ -15,6 +15,10 @@ router = APIRouter(
 ###################################################################################
 # FUNCTION NAME: CREATE_USER
 # THIS FUNCTION WILL CREATE A USER IN USERS TABLE IN FASTAPI DATABASE
+# While testing from Postman, we have used the path "/users" and not "/users/" but while testing in this file
+# we have used the path "/users/" and if we use just "/users", it is failing, but why?
+# because, when we send a request to path "/users", it will be redirected to path "/users/" and the response
+# code will be '307', which will not match with '201' and the test fails
 ###################################################################################
 @router.post("/", status_code = status.HTTP_201_CREATED, response_model = schemas.UserResponse)
 def create_users(user : schemas.UserCreate, db: Session = Depends(get_db)):
