@@ -138,6 +138,17 @@ source venv/bin/activate
   - We can create the fixtures, it is a function which other functions can inherit
   - We can also parameterize the tests
 
+### Build a CI/CD pipeline using Github Actions
+
+- Setup a Github Actions workflow job
+- Need to setup the environment variables so that tests can run, there are three ways:
+  - Set the environment variables in the workflow using hardcoded values
+  - Set in Github, Settings -> Secrets, but this will set it globally
+  - Set in Github, Settings -> Environments, this is a better way which will set as per the environment
+- Need to setup the postgres database for testing to complete
+  - Need to mention the step in workflow file to run the postgres container first and then the tests
+- Next, create a docker image from GitHub and push to Docker Hub from where the production server can pull the Image
+
 #### Some Issues to tackle :
 
 - sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SCRAM authentication requires libpq version 10 or above(while running postgresql
