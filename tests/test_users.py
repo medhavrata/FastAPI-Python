@@ -8,7 +8,7 @@ from jose import JWTError, jwt
 def test_root(client):
     res = client.get("/")
     print(res.json().get('message'))
-    assert "First fastAPI running successfully, what's inside container, okay" == res.json().get('message')
+    assert "First fastAPI running successfully, changes pushed via ci/cd" == res.json().get('message')
     assert res.status_code == 200
 
 # While testing from Postman, we have used the path "/users" and not "/users/" but while testing in this file
