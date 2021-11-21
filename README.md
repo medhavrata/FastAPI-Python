@@ -148,6 +148,9 @@ source venv/bin/activate
 - Need to setup the postgres database for testing to complete
   - Need to mention the step in workflow file to run the postgres container first and then the tests
 - Next, create a docker image from GitHub and push to Docker Hub from where the production server can pull the Image
+- For creating a docker image via github actions, you need docker hub access token, which is not available on free account
+- Setup a separate job for CD in the github workflow files
+- Look for some actions from GitHub Marketplace to use to deploy the changes to Heroku
 
 #### Some Issues to tackle :
 

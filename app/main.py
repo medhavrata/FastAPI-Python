@@ -55,7 +55,7 @@ app.include_router(vote.router)
 
 @app.get("/")
 def root():
-    return {"message": "First fastAPI running successfully, what's inside container, okay"}
+    return {"message": "First fastAPI running successfully, changes pushed via ci/cd"}
 
 ###################################################################################
 # TEST FUNCTION
