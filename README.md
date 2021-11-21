@@ -151,6 +151,7 @@ source venv/bin/activate
 - For creating a docker image via github actions, you need docker hub access token, which is not available on free account
 - Setup a separate job for CD in the github workflow files
 - Look for some actions from GitHub Marketplace to use to deploy the changes to Heroku
+- Look for a github action from marketplace(appleboy ssh) to deploy the changes to ubuntu server
 
 #### Some Issues to tackle :
 
